@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+    {% if user.is_authenticated %}
+        <h3>Create Profile Page</h3>
+            <div class="form">
+                <div class="form-group">
+                    <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                        <button type="submit" class="btn btn-info" style="padding: .2rem 1.5rem;">Create Profile Page</button>
+                    </form>
+                    <br>
+                    <input class="btn btn-sm btn-secondary" style="padding: .2rem 1.5rem;" type=button value="Cancel" onClick="javascript:history.go(-1);">
+                </div>
+            </div>
+    {% else %}
+        <a class="btn btn-sm btn-info" href="{% url 'login' %}" role="button">Login</a>
+    {% endif %}
+</div>
+{% endblock content %}
+

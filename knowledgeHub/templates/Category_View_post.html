@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section>
+
+
+<div class="container my-5">
+  
+    {% for post in queryset %}
+    <div class="card mb-3">
+      <div class="col-md-4 px-0">
+        <img src="{{ post.thumbnail.url }}" class="img-fluid">
+    </div>
+        <div class="card-body">
+          <h5 class="card-title"><a class="text-dark" href="{% url 'post-detail' post.id %}">{{ post.title }} </a></h5>
+          
+          <p class="card-text"><small class="text-muted"><a href="{% url  'show_profile_page' post.author.profile.id %}"> {{ post.author.first_name }} {{ post.author.last_name }}</a></small></p>
+          <p class="card-text">{{ post.content | safe | slice:":200" }}</p>
+          <p class="card-text"><small class="text-muted">{{ post.timestamp|timesince }} ago</small></p>
+        </div>
+      </div>
+      {% endfor %}
+</div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination pagination-template d-flex justify-content-center">
+    {% if queryset.has_previous %}
+      <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+    {% endif %}
+    {% for i in queryset.paginator.page_range %}
+      {% if queryset.number == i %}
+          <li class="page-item active"><a href="{{ queryset.number }}" class="page-link bg-info">{{ i }}</a></li>
+      {% elif i > queryset.number|add:'-5' and i < queryset.number|add:'5' %}
+          <li class="page-item"><a href="?{{ page_request_var }}={{ i }}" class="page-link active">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if queryset.has_next %}
+      <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+    {% endif %}
+  </ul>
+</nav>
+</section>
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <h3>Profile Detail</h3>
+    <br>
+    <br>
+    
+        {% if page_user.profile_pic %}
+            <figure class="figure">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ page_user.profile_pic.url }}" class="card-img-top" alt="...">
+                  </div>
+            </figure>
+        {% else %}
+            <figure class="figure">
+                <img src="{% static 'img/default.jpg' %}" class="figure-img img-fluid rounded" alt="...">
+                <figcaption class="figure-caption text-end"></figcaption>
+            </figure>
+        {% endif %}
+    
+    <br>
+        <h5 >{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h5>
+    
+            {% if page_user.website_url %}
+                <a href="{{ page_user.website_url }}"><i class="fas fa-globe-americas"></i></a> 
+            {% endif %}
+            {% if page_user.youtube_url %}
+                <a href="{{ page_user.profile.youtube_url }}"><i class="fab fa-youtube"></i></a> 
+            {% endif %}
+            {% if page_user.facebook_url %}
+                <a href="{{ page_user.profile.facebook_url }}"><i class="fab fa-facebook-square"></i></a>
+            {% endif %}
+            {% if page_user.twitter_url %}
+                <a href="{{ page_user.profile.twitter_url }}"><i class="fab fa-twitter"></i></a>
+            {% endif %}
+            {% if page_user.instagram_url %}
+                <a href="{{ page_user.profile.instagram_url }}"><i class="fab fa-instagram-square"></i></a>
+            {% endif %}
+    
+            <p><strong>Email: </strong>{{ page_user.user.email }}</p>
+            <p><strong>Bio: </strong>{{ page_user.bio }}</p>
+            
+            <br>
+            {% if user.id == page_user.user.id %} 
+            <a class="btn btn-sm btn-info" style="padding: .2rem 1.5rem;" href="{% url 'edit_profile_page' user.profile.id %}" role="button">Edit Profile</a>
+            {% endif %}
+            <input class="btn btn-sm btn-secondary" style="padding: .2rem 1.5rem;" type=button value="Back" onClick="javascript:history.go(-1);">
+        </div>
+    
+       
+    </div>
+
+</div>
+
+
+{% endblock content %}

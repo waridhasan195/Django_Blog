@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    {% if user.is_authenticated %}
+    <h3>Add Category</h3>
+    <br>
+        <div class="form">
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-info" style="padding: .2rem 1.5rem;">Add Category</button>
+                </form>
+                <br>
+        <input class="btn btn-sm btn-secondary" style="padding: .2rem 1.5rem;" type=button value="Cancel" onClick="javascript:history.go(-1);">
+
+            </div>
+        </div>
+    {% else %}
+    <a class="btn btn-sm btn-info" href="{% url 'login' %}" role="button">Login</a>
+{% endif %}
+</div>
+
+
+{% endblock content %}

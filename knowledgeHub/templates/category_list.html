@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+
+  <h3>Category List</h3>
+
+      <div class="alert alert-light" role="alert">
+        {% for category in object_list %} 
+        <div class="alert alert-secondary" role="alert">
+          <a class="text-dark" href="{% url 'category' category.pk %}">{{  category }}</a>
+        </div>
+        {% endfor %}
+      </div>
+
+</div>
+
+
+
+{% endblock content %}
+

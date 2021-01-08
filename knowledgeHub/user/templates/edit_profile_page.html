@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <h2>Profile Settings</h2>
+    <br>
+    {{ user.profile.bio }}
+    <br>
+    <br>
+
+
+    <div class="form">
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-info" style="padding: .2rem 1.5rem;">Update</button>
+            </form>
+        </div>
+    </div>
+    <input class="btn btn-sm btn-secondary" style="padding: .2rem 1.5rem;" type=button value="Back" onClick="javascript:history.go(-1);">
+    
+</div>
+{% endblock content %}

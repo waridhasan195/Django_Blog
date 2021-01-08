@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+<div class="container my-5">
+    <h3>Delete Post</h3>
+    <p>Are you sure <strong>{{ post.title }}</strong> delete ?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" style="padding: .2rem 1.5rem;">DELETE</button>
+        </form>
+        <br>
+        <input class="btn btn-sm btn-info" style="padding: .2rem 1.5rem;" type=button value="Cancel" onClick="javascript:history.go(-1);">
+{% else %}
+<a class="btn btn-sm btn-info" href="#" role="button">Login</a>
+{% endif %}
+</div>
+
+
+{% endblock content %}
